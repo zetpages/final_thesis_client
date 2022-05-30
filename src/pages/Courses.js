@@ -58,8 +58,8 @@ class Courses extends React.Component {
                         end: el.dayDate+'T'+el.timeEnd
                     }))
                 ];
-                console.log(data[0])
-                console.log(res.data)
+                // console.log(data[0])
+                // console.log(res.data)
                 // const newData = data[0];
                 // const newData = [...data];
                 // console.log(newData)

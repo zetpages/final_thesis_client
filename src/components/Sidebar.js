@@ -53,7 +53,7 @@ export default (props = {}) => {
   const {user, board} = useContext(Context);
   let currentUserId = 0;
    board?.admins.map((el) => {
-     if (el.id === user.id.id) {
+     if (el.id === user.details.id) {
        currentUserId = el.id;
      }
    })

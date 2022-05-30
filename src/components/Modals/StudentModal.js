@@ -30,15 +30,15 @@ const StudentModal = observer(({show, onHide}) => {
 
     // console.log(board.gender)
 
-    useEffect(() => {
-        fetchAdmin().then(data => board.setAdmins(data));
-        fetchStudent().then(data => board.setStudents(data));
-        fetchTeacher().then(data => board.setTeachers(data));
-        fetchGroup().then(data => board.setGroups(data));
-        fetchSubscription().then(data => board.setSubscriptions(data));
-        fetchGender().then(data => board.setGender(data));
-        fetchStStatus().then(data => board.setStudentStatus(data));
-    }, []);
+    // useEffect(() => {
+    //     fetchAdmin().then(data => board.setAdmins(data));
+    //     fetchStudent().then(data => board.setStudents(data));
+    //     fetchTeacher().then(data => board.setTeachers(data));
+    //     fetchGroup().then(data => board.setGroups(data));
+    //     fetchSubscription().then(data => board.setSubscriptions(data));
+    //     fetchGender().then(data => board.setGender(data));
+    //     fetchStStatus().then(data => board.setStudentStatus(data));
+    // }, []);
 
 
 

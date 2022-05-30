@@ -3,14 +3,17 @@ import {makeAutoObservable} from "mobx";
 export default class AdminBoard {
     constructor() {
         this._admins = [];
+        this._branches = [];
         this._teachers = [];
         this._students = [];
+        this._rooms = [];
         this._groups = [];
         this._subscriptions = [];
         this._gender = [];
         this._regularClass = [];
         this._studentStatus = [];
         this._selectedAdmin = {};
+        this._selectedBranch = {};
         this._selectedTeacher = {};
         this._selectedGroup = {};
         this._selectedRegularClass = {};
@@ -25,12 +28,20 @@ export default class AdminBoard {
         this._admins = admins;
     }
 
+    setBranches(branches) {
+        this._branches = branches;
+    }
+
     setTeachers(teachers) {
         this._teachers = teachers;
     }
 
     setStudents(students) {
         this._students = students;
+    }
+
+    setRooms(rooms) {
+        this._rooms = rooms;
     }
 
     setGroups(groups) {
@@ -56,6 +67,11 @@ export default class AdminBoard {
     setSelectedAdmin(admin) {
         this.setPage(1);
         this._selectedAdmin = admin;
+    }
+
+    setSelectedBranch(branch) {
+        this.setPage(1);
+        this._selectedBranch = branch;
     }
 
     setSelectedTeacher(teacher) {
@@ -95,12 +111,20 @@ export default class AdminBoard {
         return this._admins;
     }
 
+    get branches() {
+        return this._branches;
+    }
+
     get teachers() {
         return this._teachers;
     }
 
     get students() {
         return this._students;
+    }
+
+    get rooms() {
+        return this._rooms;
     }
 
     get groups() {
@@ -125,6 +149,10 @@ export default class AdminBoard {
 
     get selectedAdmin() {
         return this._selectedAdmin;
+    }
+
+    get selectedBranch() {
+        return this._selectedBranch;
     }
 
     get selectedTeacher() {

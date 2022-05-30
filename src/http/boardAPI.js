@@ -12,14 +12,39 @@ export const createStudent = async (student) => {
     return fetchStudent();
 }
 
+export const fetchRoom = async () => {
+    const {data} = await $authHost.get('api/room/');
+    return data;
+}
+
+export const createRoom = async (room) => {
+    const {data} = await $authHost.post('api/room/', room);
+    return data;
+}
+
+export const fetchBranch = async () => {
+    const {data} = await $authHost.get('api/branch/');
+    return data;
+}
+
+export const createBranch = async (branch) => {
+    const {data} = await $authHost.post('api/branch/', branch);
+    return data;
+}
+
 export const fetchStudent = async () => {
     const {data} = await $authHost.get('api/student/');
-    console.log("called fetch")
+    // console.log("called fetch")
     return data;
 }
 
 export const removeOneStudent = async (id) => {
     const {data} = await $authHost.delete('api/student/' + id);
+    return data;
+}
+
+export const removeOneGroup = async (id) => {
+    const {data} = await $authHost.delete('api/group/' + id);
     return data;
 }
 
@@ -50,6 +75,11 @@ export const createGroup = async (group) => {
 
 export const fetchGroup = async () => {
     const {data} = await $authHost.get('api/group/');
+    return data;
+}
+
+export const fetchOneGroup = async (id) => {
+    const {data} = await $authHost.get('api/group/' + id)
     return data;
 }
 

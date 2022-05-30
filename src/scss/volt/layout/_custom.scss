@@ -455,3 +455,21 @@ h2 {
         border-radius: 0 !important;
     }
 }
+
+.no-right_p .nav-item:not(:last-child) {
+    padding-right: 0 !important;
+}
+
+.with-effect {
+    animation-name: animate;
+    animation-duration: .5s;
+}
+
+@keyframes animate {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

@@ -6,7 +6,14 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Preloader from "../components/Preloader";
 import {Context} from "../index";
-import {fetchRegularClass, fetchStudent, fetchSubscription} from "../http/boardAPI";
+import {
+    fetchAdmin, fetchBranch, fetchGender,
+    fetchGroup,
+    fetchRegularClass, fetchRoom, fetchStStatus,
+    fetchStudent,
+    fetchSubscription,
+    fetchTeacher
+} from "../http/boardAPI";
 
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
@@ -58,9 +65,17 @@ export default function HomePage() {
     useEffect(() => {
         fetchStudent().then(data => board.setStudents(data));
         fetchRegularClass().then(data => board.setRegularClass(data));
+        fetchAdmin().then(data => board.setAdmins(data));
+        fetchTeacher().then(data => board.setTeachers(data));
+        fetchGroup().then(data => board.setGroups(data));
+        fetchSubscription().then(data => board.setSubscriptions(data));
+        fetchGender().then(data => board.setGender(data));
+        fetchStStatus().then(data => board.setStudentStatus(data));
+        fetchRoom().then(data => board.setRooms(data));
+        fetchBranch().then(data => board.setBranches(data));
     },[]);
 
-    // console.log(board)
+    console.log(board)
     console.log(user.isAuth)
 
     return (

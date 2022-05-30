@@ -4,7 +4,7 @@ export default class UserAuth {
     constructor() {
         this._isAuth = false;
         this._user = {};
-        this._id = "";
+        this._details = "";
         makeAutoObservable(this)
     }
 
@@ -15,12 +15,12 @@ export default class UserAuth {
         this._user = user
     }
 
-    getUs(id) {
-        this._id = id;
+    getDetails(details) {
+        this._details = details;
     }
 
-    get id() {
-        return this._id;
+    get details() {
+        return this._details;
     }
 
     get isAuth() {

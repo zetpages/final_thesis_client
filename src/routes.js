@@ -33,6 +33,7 @@ import Parents from "./pages/users/Parents";
 import Legals from "./pages/users/Legals";
 import Leads from "./pages/users/Leads";
 import SingleStudent from "./pages/SingleStudent";
+import SingleGroup from "./pages/SingleGroup";
 
 import DocsOverview from "./pages/documentation/DocsOverview";
 import DocsDownload from "./pages/documentation/DocsDownload";
@@ -48,6 +49,7 @@ export const Routes = {
     DashboardOverview: { path: "/dashboard" },
     Tasks: { path: "/tasks" },
     Groups: { path: "/groups" },
+    SingleGroup: { path: "/groups/:id" },
     Courses: { path: "/courses" },
     Access: { path: "/access" },
     News: { path: "/news" },
@@ -151,6 +153,10 @@ export const authRoutes = [
     {
         path: "/groups",
         Component: Groups
+    },
+    {
+        path: "/groups/:id",
+        Component: SingleGroup
     },
     {
         path: "/courses",

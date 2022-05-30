@@ -1,7 +1,8 @@
-import React, {useContext, useState, lazy, Suspense} from "react";
+import React, {useContext, useState } from "react";
 import InnerTopBar from "../components/InnerTopBar";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
+import {CenterContext} from "../../App";
 import {
     Button,
     ButtonGroup,
@@ -27,19 +28,28 @@ import {
     faEnvelope,
     faPhone,
     faGrip,
-    faSquareEnvelope,
     faPlus
 } from "@fortawesome/free-solid-svg-icons";
 import StudentModal from "../../components/Modals/StudentModal";
-// import util from "util";
-import groups from "../Groups";
 import { fetchStudent, removeOneStudent } from "../../http/boardAPI";
 
 const Students = observer(() => {
-    const {board} = useContext(Context);
+    const {board, user} = useContext(Context);
+    const {center, loggedUser} = useContext(CenterContext);
     const totalStudents = board.students.length;
     const [studentVisible, setStudentVisible] = useState(false);
     console.log(board);
+    console.log(user)
+    console.log(loggedUser)
+
+
+    // let studentList = [];
+    // board.students.map((el) => {
+    //     if (el.centerId === user.details.id) {
+    //         studentList.push(el)
+    //     }
+    // });
+    // console.log(studentList)
     board.students.map((el) => {
         // console.log(el.groups[0].regular_classes[0].course.name);
         // console.log(el.groups[0].regular_classes[0].level.name);
@@ -77,7 +87,7 @@ const Students = observer(() => {
             <Popover id="popover-basic">
                 <Popover.Header as="h3">Расписание</Popover.Header>
                 <Popover.Body>
-                    {student.groups.map((t) =>
+                    {student.groups?.map((t) =>
                         t.regular_classes.map((k) =>
                             <span key={k.id}>
                                 <span className="fw-normal">
@@ -102,7 +112,7 @@ const Students = observer(() => {
             <Popover id="popover-basic">
                 <Popover.Header as="h3">Расписание</Popover.Header>
                 <Popover.Body>
-                    {student.groups.map((el) =>
+                    {student.groups?.map((el) =>
                         <div className="fw-normal" key={el.id}>{el.name}</div>
                     )}
                 </Popover.Body>
@@ -113,8 +123,8 @@ const Students = observer(() => {
             <Popover id="popover-basic">
                 <Popover.Header as="h3">Расписание</Popover.Header>
                 <Popover.Body>
-                    {student.groups.map((t) =>
-                        t.regular_classes.map((k, i) =>
+                    {student.groups?.map((t) =>
+                        t?.regular_classes.map((k, i) =>
                             <div className="fw-normal" key={i}>
                                 {k.course.name}
                             </div>
@@ -128,8 +138,8 @@ const Students = observer(() => {
             <Popover id="popover-basic">
                 <Popover.Header as="h3">Расписание</Popover.Header>
                 <Popover.Body>
-                    {student.groups.map((t) =>
-                        t.regular_classes.map((k,i) =>
+                    {student.groups?.map((t) =>
+                        t.regular_classes?.map((k,i) =>
                             <span className="fw-normal" key={i}>
                                 {k.room.name}
                             </span>
@@ -143,7 +153,7 @@ const Students = observer(() => {
             <Popover id="popover-basic">
                 <Popover.Header as="h3">Расписание</Popover.Header>
                 <Popover.Body>
-                    {student.groups.map((t) =>
+                    {student.groups?.map((t) =>
                         <span className="fw-normal" key={t.id}>
                             {t.branch.name}
                         </span>
@@ -156,7 +166,7 @@ const Students = observer(() => {
             <Popover id="popover-basic">
                 <Popover.Header as="h3">Расписание</Popover.Header>
                 <Popover.Body>
-                    {student.groups.map((t, i) =>
+                    {student.groups?.map((t, i) =>
                         <span className="fw-normal" key={i}>
                             {t.level.name}
                         </span>
@@ -223,7 +233,7 @@ const Students = observer(() => {
                 </td>
                 <td>
                   <span className="fw-normal">
-                    {student.gender.name}
+                    {student.gender?.name}
                   </span>
                 </td>
                 <td>
@@ -233,7 +243,7 @@ const Students = observer(() => {
                 </td>
                 <td>
                     <span className="fw-normal">
-                        {student.subscription.name}
+                        {student.subscription?.name}
                     </span>
                 </td>
                 <td>
@@ -246,15 +256,15 @@ const Students = observer(() => {
                   </span>
                 </td>
                 <td>
-                    { student.teachers.length ?
-                        student.teachers.map((el) =>
+                    { student.teachers?.length ?
+                        student.teachers?.map((el) =>
                             <span className="fw-normal" key={el.id}>{el.name}</span>
                         ) : <span className="fw-normal">Set teacher</span>
                     }
                 </td>
                 <td>
                     <span className="fw-normal">
-                        {student.admin.name}
+                        {student.admin?.name}
                     </span>
                 </td>
 
@@ -288,7 +298,7 @@ const Students = observer(() => {
                 </td>
                 <td>
                   <span className="fw-normal">
-                    {student.discount.amount}%
+                    {student.discount?.amount}%
                   </span>
                 </td>
                 <td>
@@ -304,19 +314,21 @@ const Students = observer(() => {
     return (
         <>
             <InnerTopBar />
-            <Button
-                variant={"outline-dark"}
-                className="mt-0 mb-1 p-2"
-                onClick={() => setStudentVisible(true)}
-            >
-                <FontAwesomeIcon icon={faPlus} className="icon-dark" />
-            </Button>
             <Card border="light" className="table-wrapper table-responsive shadow-sm student__table-wrapper">
                 <Card.Body className="pt-0 position-relative pb-6   ">
                     <Table hover className="user-table align-items-center">
                         <thead>
                         <tr>
-                            <th className="border-bottom"><FontAwesomeIcon icon={faU} className="icon-dark ml__5px" /></th>
+                            {/*<th className="border-bottom"><FontAwesomeIcon icon={faU} className="icon-dark ml__5px" /></th>*/}
+                            <th className="border-bottom">
+                                <Button
+                                    variant={"danger"}
+                                    className="mt-0 mb-0 px-1 py-0"
+                                    onClick={() => setStudentVisible(true)}
+                                >
+                                    <FontAwesomeIcon icon={faPlus} className="icon-dark" />
+                                </Button>
+                            </th>
                             <th className="border-bottom">ID</th>
                             <th className="border-bottom">Фото</th>
                             <th className="border-bottom">ФИО</th>
@@ -339,7 +351,7 @@ const Students = observer(() => {
                         </tr>
                         </thead>
                         <tbody>
-                        {board.students.map((t, i) => <StudentRow key={i} {...t} />)}
+                        {center.students?.map((t, i) => <StudentRow key={i} {...t} />)}
                         </tbody>
                     </Table>
                     <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between position-absolute bottom-0">

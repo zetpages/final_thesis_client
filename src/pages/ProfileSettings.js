@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import {Col, Row, Button, Card, Form, InputGroup, Table, Tabs, Tab} from 'react-bootstrap';
 import {Context} from "../index";
+import {CenterContext} from "../App";
 import InnerTopBar from "./components/InnerTopBar";
 import Datetime from "react-datetime";
 import moment from "moment-timezone";
@@ -17,27 +18,10 @@ function Sonnet() {
 
 export default function ProfileSettings() {
 
-  const {user,board} = useContext(Context);
+  const {loggedUser} = useContext(CenterContext);
   const [birthday, setBirthday] = useState("");
   const [key, setKey] = useState('home');
 
-  let currentUser = {};
-
-  // useEffect(() => {
-    board?.admins?.map((el) => {
-      if (el.id === user?.id.id) {
-        return currentUser = Object.assign({}, el)
-      }
-      // user?._id.map((t) => {
-      //   if (t.id === el.id) {
-      //     return currentUser = Object.assign({}, el)
-      //   }
-      // })
-    });
-  // },[])
-
-  console.log(user)
-  console.log(board)
 
   return (
     <>
@@ -195,22 +179,22 @@ export default function ProfileSettings() {
               <Card border="light" className="text-center p-0 mb-4">
                 <div style={{ backgroundImage: `url(${ProfileCover})` }} className="profile-cover rounded-top" />
                 <Card.Body className="pb-5">
-                  <Card.Img key={currentUser.id} src={process.env.REACT_APP_API_URL + currentUser.img} className="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4" />
-                  <Card.Title>{currentUser.name}</Card.Title>
+                  <Card.Img key={loggedUser.id} src={process.env.REACT_APP_API_URL + loggedUser.img} className="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4" />
+                  <Card.Title>{loggedUser.name}</Card.Title>
                   {/*<Card.Subtitle className="fw-normal">{currentUser.phone}</Card.Subtitle>*/}
                   {/*<Card.Text className="text-gray mb-4">{currentUser.email}</Card.Text>*/}
                   <div className="mt-3">
                     <div className="d-flex justify-content-between custom__prop-line mt-2">
                       <span className="text-nowrap">Почта</span>
-                      <h6>{currentUser.email}</h6>
+                      <h6>{loggedUser.email}</h6>
                     </div>
                     <div className="d-flex justify-content-between custom__prop-line mt-2">
                       <span className="text-nowrap">Пол</span>
-                      <h6>{currentUser?.gender?.name}</h6>
+                      <h6>{loggedUser.gender?.name}</h6>
                     </div>
                     <div className="d-flex justify-content-between custom__prop-line mt-2">
                       <span className="text-nowrap">Телефон</span>
-                      <h6>{currentUser.phone}</h6>
+                      <h6>{loggedUser.phone}</h6>
                     </div>
                     <div className="d-flex justify-content-between custom__prop-line mt-2">
                       <span className="text-nowrap">Роль</span>

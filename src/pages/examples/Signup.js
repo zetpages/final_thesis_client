@@ -15,6 +15,7 @@ import {registration} from "../../http/userAPI";
 
 export default () => {
   const {user} = useContext(Context);
+  console.log(user)
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

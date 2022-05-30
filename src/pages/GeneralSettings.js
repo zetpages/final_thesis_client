@@ -1,62 +1,104 @@
 import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faCog, faHome, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Col, Row, Form, Button, ButtonGroup, Breadcrumb, InputGroup, Dropdown } from 'react-bootstrap';
-
-import { TransactionsTable } from "../components/Tables";
+import { Col, Row, Nav, Tab } from 'react-bootstrap';
+import InnerTopBar from "./components/InnerTopBar";
+import BranchElement from "./components/BranchElement";
+import RoomElement from "./components/RoomElement";
+import BillingElement from "./components/BillingElement";
+import SubscriptionElement from "./components/SubscriptionElement";
+import DiscountTypeElement from "./components/DiscountTypeElement";
+import DiscountElement from "./components/DiscountElement";
+import CourseTypeElement from "./components/CourseTypeElement";
+import CourseElement from "./components/CourseElement";
+import LevelElement from "./components/LevelElement";
+import GroupStatusElement from "./components/GroupStatusElement";
+import StudentStatusElement from "./components/StudentStatusElement";
 
 
 export default () => {
+
   return (
     <>
-      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
-        <div className="d-block mb-4 mb-md-0">
-          <Breadcrumb className="d-none d-md-inline-block" listProps={{ className: "breadcrumb-dark breadcrumb-transparent" }}>
-            <Breadcrumb.Item><FontAwesomeIcon icon={faHome} /></Breadcrumb.Item>
-            <Breadcrumb.Item>Oku</Breadcrumb.Item>
-            <Breadcrumb.Item active>настройки</Breadcrumb.Item>
-          </Breadcrumb>
-          <h4>Общие настройки</h4>
-        </div>
-        <div className="btn-toolbar mb-2 mb-md-0">
-          <ButtonGroup>
-            <Button variant="outline-primary" size="sm">Поделиться</Button>
-            <Button variant="outline-primary" size="sm">Экспортировать</Button>
-          </ButtonGroup>
-        </div>
-      </div>
-
-      <div className="table-settings mb-4">
-        <Row className="justify-content-between align-items-center">
-          <Col xs={8} md={6} lg={3} xl={4}>
-            <InputGroup>
-              <InputGroup.Text>
-                <FontAwesomeIcon icon={faSearch} />
-              </InputGroup.Text>
-              <Form.Control type="text" placeholder="Search" />
-            </InputGroup>
+    <InnerTopBar/>
+      <Tab.Container id="left-tabs-example" defaultActiveKey="branch">
+        <Row>
+          <Col sm={3}>
+            <Nav variant="pills" className="flex-column no-right_p">
+              <Nav.Item>
+                <Nav.Link eventKey="branch">Филлиалы</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="room">Аудитории</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="billing">Счета</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="subs">Абонементы</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="discount">Скидки</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="disType">Типы скидок</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="course">Курсы</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="courseType">Типы занятий</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="levels">Уровни</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="groupStatus">Статусы групп</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="studentStatus">Статусы учеников</Nav.Link>
+              </Nav.Item>
+            </Nav>
           </Col>
-          <Col xs={4} md={2} xl={1} className="ps-md-0 text-end">
-            <Dropdown as={ButtonGroup}>
-              <Dropdown.Toggle split as={Button} variant="link" className="text-dark m-0 p-0">
-                <span className="icon icon-sm icon-gray">
-                  <FontAwesomeIcon icon={faCog} />
-                </span>
-              </Dropdown.Toggle>
-              <Dropdown.Menu className="dropdown-menu-xs dropdown-menu-right">
-                <Dropdown.Item className="fw-bold text-dark">Show</Dropdown.Item>
-                <Dropdown.Item className="d-flex fw-bold">
-                  10 <span className="icon icon-small ms-auto"><FontAwesomeIcon icon={faCheck} /></span>
-                </Dropdown.Item>
-                <Dropdown.Item className="fw-bold">20</Dropdown.Item>
-                <Dropdown.Item className="fw-bold">30</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+          <Col sm={9}>
+            <Tab.Content>
+              <Tab.Pane eventKey="branch">
+                <div>
+                  <BranchElement/>
+                 </div>
+              </Tab.Pane>
+              <Tab.Pane eventKey="room">
+                <RoomElement />
+              </Tab.Pane>
+              <Tab.Pane eventKey="billing">
+                <BillingElement />
+              </Tab.Pane>
+              <Tab.Pane eventKey="subs">
+                <SubscriptionElement />
+              </Tab.Pane>
+              <Tab.Pane eventKey="discount">
+                <DiscountElement />
+              </Tab.Pane>
+              <Tab.Pane eventKey="disType">
+                <DiscountTypeElement />
+              </Tab.Pane>
+              <Tab.Pane eventKey="course">
+                <CourseElement />
+              </Tab.Pane>
+              <Tab.Pane eventKey="courseType">
+                <CourseTypeElement />
+              </Tab.Pane>
+              <Tab.Pane eventKey="levels">
+                <LevelElement />
+              </Tab.Pane>
+              <Tab.Pane eventKey="groupStatus">
+                <GroupStatusElement />
+              </Tab.Pane>
+              <Tab.Pane eventKey="studentStatus">
+                <StudentStatusElement />
+              </Tab.Pane>
+            </Tab.Content>
           </Col>
         </Row>
-      </div>
-
-      <TransactionsTable />
+      </Tab.Container>
     </>
   );
 };
