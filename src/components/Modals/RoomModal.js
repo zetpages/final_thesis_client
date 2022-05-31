@@ -1,28 +1,21 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Button, Dropdown, Form, Row, Col, Modal} from "react-bootstrap";
 import {Context} from "../../index";
 import {CenterContext} from "../../App";
-import {createRoom, fetchRoom, fetchBranch} from "../../http/boardAPI";
+import {createRoom} from "../../http/boardAPI";
 import {observer} from "mobx-react-lite";
 
 const RoomModal = observer(({show, onHide}) => {
     const {board} = useContext(Context);
     const {center} = useContext(CenterContext);
-    const centerId = center.id;
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-
-    // useEffect(() => {
-    //     fetchRoom().then(data => board.setRooms(data));
-    //     fetchBranch().then(data => board.setBranches(data));
-    // }, []);
-
 
     const addRoom = () => {
         const formData = new FormData()
         formData.append('name', name);
         formData.append('description', description);
-        formData.append('cebterId', centerId);
+        formData.append('centerId', center.id);
         formData.append('branchId', board.selectedBranch.id);
 
         createRoom(formData).then(data => board.setRooms(data));
@@ -55,16 +48,23 @@ const RoomModal = observer(({show, onHide}) => {
                 <Form>
                     <Row>
                         <Dropdown as={Col} className="mt-2 mb-2">
-                            <Dropdown.Toggle >{board.selectedBranch.name || "Филиал"}</Dropdown.Toggle>
+                            <Dropdown.Toggle >{board.selectedBranch?.name || "Филиал"}</Dropdown.Toggle>
                             <Dropdown.Menu>
-                                {board.branches.map(branch =>
+                                {board.branches.length > 0 ? board.branches.map(branch =>
                                     <Dropdown.Item
                                         onClick={() => board.setSelectedBranch(branch)}
                                         key={branch.id}
                                     >
                                         {branch.name}
                                     </Dropdown.Item>
-                                )}
+                                ) :
+                                    <Dropdown.Item
+                                        onClick={() => board.setSelectedBranch(board.branches.name)}
+                                        key={board.branches.id}
+                                    >
+                                        {board.branches.name}
+                                    </Dropdown.Item>
+                                }
                             </Dropdown.Menu>
                         </Dropdown>
 

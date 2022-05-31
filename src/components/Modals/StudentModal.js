@@ -4,13 +4,9 @@ import Datetime from "react-datetime";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import {Context} from "../../index";
+import {CenterContext} from "../../App";
 import {
     createStudent,
-    fetchTeacher,
-    fetchStudent,
-    fetchGroup,
-    fetchSubscription,
-    fetchStStatus, fetchGender, fetchAdmin
 } from "../../http/boardAPI";
 import {observer} from "mobx-react-lite";
 import {InputGroup} from "@themesberg/react-bootstrap";
@@ -18,6 +14,8 @@ import moment from "moment-timezone";
 
 const StudentModal = observer(({show, onHide}) => {
     const {board} = useContext(Context);
+    const {center} = useContext(CenterContext);
+
     const [name, setName] = useState('');
     const [parentName, setParentName] = useState('');
     const [phone, setPhone] = useState('');
@@ -27,20 +25,6 @@ const StudentModal = observer(({show, onHide}) => {
     const [password, setPassword] = useState('');
     const [birthday, setBirthday] = useState("");
     const [balance, setBalance] = useState(0);
-
-    // console.log(board.gender)
-
-    // useEffect(() => {
-    //     fetchAdmin().then(data => board.setAdmins(data));
-    //     fetchStudent().then(data => board.setStudents(data));
-    //     fetchTeacher().then(data => board.setTeachers(data));
-    //     fetchGroup().then(data => board.setGroups(data));
-    //     fetchSubscription().then(data => board.setSubscriptions(data));
-    //     fetchGender().then(data => board.setGender(data));
-    //     fetchStStatus().then(data => board.setStudentStatus(data));
-    // }, []);
-
-
 
     const selectFile = (e) => {
         setFile(e.target.files[0])
@@ -64,6 +48,7 @@ const StudentModal = observer(({show, onHide}) => {
         formData.append('genderId', board.selectedGender.id);
         formData.append('studentStatusId', board.selectedStudentStatus.id);
         formData.append('discountId', 1);
+        formData.append('centerId', center.id);
 
         createStudent(formData).then(data => board.setStudents(data));
         onHide()

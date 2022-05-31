@@ -9,9 +9,9 @@ import { TransactionsTable } from "../components/Tables";
 export default () => {
   return (
     <>
-      <InnerTopBar />
+      {/*<InnerTopBar />*/}
 
-      <TransactionsTable />
+      {/*<TransactionsTable />*/}
     </>
   );
 };

@@ -6,43 +6,29 @@ import { CSSTransition } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBook,
-  faBoxOpen,
   faChartPie,
-  faCog,
-  faFileAlt,
   faHandHoldingUsd,
   faSignOutAlt,
   faTable,
   faTimes,
-  faCalendarAlt,
-  faMapPin,
-  faInbox,
-  faRocket,
-  faPersonBooth,
-  faPeopleArrows,
   faUserPlus,
   faUserGraduate,
   faUserTie,
   faUserFriends,
   faUserAstronaut,
-  faSuitcase,
   faKey,
   faWallet,
   faCreditCard,
   faUsers,
   faIdCard,
-  faCodeBranch,
   faSignal, faListCheck
 } from "@fortawesome/free-solid-svg-icons";
-import { Nav, Badge, Image, Button, Dropdown, Accordion, Navbar } from 'react-bootstrap';
+import { Nav, Image, Button, Dropdown, Accordion, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
 import { Routes } from "../routes";
 import ReactHero from "../assets/img/technologies/oku-hero-logo-dark.svg";
-import ProfilePicture from "../assets/img/team/profile-picture-3.jpg";
 import NavItem from "./NavItem";
 import {Context} from "../index";
-import { fetchAdmin } from "../http/boardAPI";
 
 export default (props = {}) => {
   const location = useLocation();
@@ -57,10 +43,6 @@ export default (props = {}) => {
        currentUserId = el.id;
      }
    })
-
-  useEffect(() => {
-    fetchAdmin().then(data => board.setAdmins(data));
-  }, []);
 
 
   const onCollapse = () => setShow(!show);
@@ -149,7 +131,6 @@ export default (props = {}) => {
                 <NavItem title="Педагоги" icon={faUserTie} link={Routes.Teachers.path} />
                 <NavItem title="Ученики" icon={faUserGraduate} link={Routes.Students.path} />
                 <NavItem title="Родители" icon={faUserFriends} link={Routes.Parents.path} />
-                {/* <NavItem title="Юр. лица" icon={faSuitcase} link={Routes.Legals.path} /> */}
                 <NavItem title="Лиды" icon={faUserAstronaut} link={Routes.Leads.path} />
               </CollapsableNavItem>
 
@@ -167,28 +148,6 @@ export default (props = {}) => {
                 <NavItem title="Для педагога" link={Routes.DocsLicense.path} />
                 <NavItem title="Для родителя" link={Routes.DocsFolderStructure.path} />
               </CollapsableNavItem>
-
-
-              {/*<CollapsableNavItem eventKey="components/" title="Components" icon={faBoxOpen}>*/}
-              {/*  <NavItem title="Accordion" link={Routes.Accordions.path} />*/}
-              {/*  <NavItem title="Alerts" link={Routes.Alerts.path} />*/}
-              {/*  <NavItem title="Badges" link={Routes.Badges.path} />*/}
-              {/*  <NavItem title="Breadcrumbs" link={Routes.Breadcrumbs.path} />*/}
-              {/*  <NavItem title="Buttons" link={Routes.Buttons.path} />*/}
-              {/*  <NavItem title="Forms" link={Routes.Forms.path} />*/}
-              {/*  <NavItem title="Modals" link={Routes.Modals.path} />*/}
-              {/*  <NavItem title="Navbars" link={Routes.Navbars.path} />*/}
-              {/*  <NavItem title="Navs" link={Routes.Navs.path} />*/}
-              {/*  <NavItem title="Pagination" link={Routes.Pagination.path} />*/}
-              {/*  <NavItem title="Popovers" link={Routes.Popovers.path} />*/}
-              {/*  <NavItem title="Progress" link={Routes.Progress.path} />*/}
-              {/*  <NavItem title="Tables" link={Routes.Tables.path} />*/}
-              {/*  <NavItem title="Tabs" link={Routes.Tabs.path} />*/}
-              {/*  <NavItem title="Toasts" link={Routes.Toasts.path} />*/}
-              {/*  <NavItem title="Tooltips" link={Routes.Tooltips.path} />*/}
-              {/*</CollapsableNavItem>*/}
-
-              {/* <Button as={Link} to={Routes.Upgrade.path} variant="secondary" className="upgrade-to-pro"><FontAwesomeIcon icon={faCodeBranch} className="me-1" />OkuCRM</Button> */}
             </Nav>
           </div>
         </SimpleBar>

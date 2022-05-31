@@ -43,37 +43,6 @@ const Students = observer(() => {
     console.log(loggedUser)
 
 
-    // let studentList = [];
-    // board.students.map((el) => {
-    //     if (el.centerId === user.details.id) {
-    //         studentList.push(el)
-    //     }
-    // });
-    // console.log(studentList)
-    board.students.map((el) => {
-        // console.log(el.groups[0].regular_classes[0].course.name);
-        // console.log(el.groups[0].regular_classes[0].level.name);
-        // console.log(el.groups[0].regular_classes[0].room.name);
-        // console.log(el)
-        // console.dir(el, { depth: null });
-        // console.log(util.inspect(el, {showHidden: false, depth: null, colors: true}))
-        // console.log(JSON.stringify(el, null, '\t'));
-    })
-
-    // board.students.map((el) => {
-    //     // console.log(Array.isArray(el)); // false
-    //     // console.log(Array.isArray(el.groups)); // true
-    //     el.groups.forEach((t) => {
-    //         // console.log(Array.isArray(t));
-    //         // console.log(Array.isArray(t.regular_classes)); // true
-    //         t.regular_classes.forEach((k) => {
-    //             console.log(k.course.name);
-    //         });
-    //     });
-    // });
-
-
-
     const StudentRow = (student) => {
 
         const statusName = student.studentStatusId === 1 ? "Обучается"

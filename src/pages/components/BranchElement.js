@@ -1,15 +1,16 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {CenterContext} from "../../App";
 import {Button, ButtonGroup, Card, Dropdown, OverlayTrigger, Popover, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {Routes} from "../../routes";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faEllipsisH, faTrashAlt, faPlus, faGrip} from "@fortawesome/free-solid-svg-icons";
+import BranchModal from "../../components/Modals/BranchModal";
 
 const BranchElement = () => {
 
     const {center} = useContext(CenterContext);
-    console.log(center)
+    const [branchVisible, setBranchVisible] = useState(false);
 
     const BranchRow = (branch) => {
 
@@ -82,6 +83,7 @@ const BranchElement = () => {
                                 <Button
                                     variant={"danger"}
                                     className="mt-0 mb-0 px-1 py-0"
+                                    onClick={() => setBranchVisible(true)}
                                 >
                                     <FontAwesomeIcon icon={faPlus} className="icon-dark" />
                                 </Button>
@@ -98,6 +100,7 @@ const BranchElement = () => {
                     </Table>
                 </Card.Body>
             </Card>
+            <BranchModal show={branchVisible} onHide={() => setBranchVisible(false)}/>
         </>
     );
 };

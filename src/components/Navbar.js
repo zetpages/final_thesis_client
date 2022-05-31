@@ -26,7 +26,7 @@ import {
   faMinusCircle,
   faHashtag,
   faUser,
-  faIdCard
+  faIdCard, faSadCry
 } from "@fortawesome/free-solid-svg-icons";
 import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import { Row, Col, Nav, Form, Image, Navbar, Dropdown, Container, ListGroup, InputGroup, Button, ButtonGroup, Badge } from '@themesberg/react-bootstrap';
@@ -160,33 +160,37 @@ const NavbarIn = observer(() => {
 
             </div>
             <Nav className="align-items-center">
-              <Dropdown as={Nav.Item} onToggle={markNotificationsAsRead}>
-                <Dropdown.Toggle as={Nav.Link} className="text-dark icon-notifications me-lg-3">
-                <span className="icon icon-sm">
-                  <FontAwesomeIcon icon={faBell} className="bell-shake" />
-                  {areNotificationsRead ? null : <span className="icon-badge rounded-circle unread-notifications" />}
-                </span>
-                </Dropdown.Toggle>
-                <Dropdown.Menu className="dashboard-dropdown notifications-dropdown dropdown-menu-lg dropdown-menu-center mt-2 py-0">
-                  <ListGroup className="list-group-flush">
-                    <Nav.Link href="#" className="text-center text-primary fw-bold border-bottom border-light py-3">
-                      Уведомления
-                    </Nav.Link>
+              {/*<Dropdown as={Nav.Item} onToggle={markNotificationsAsRead}>*/}
+              {/*  <Dropdown.Toggle as={Nav.Link} className="text-dark icon-notifications me-lg-3">*/}
+              {/*  <span className="icon icon-sm">*/}
+              {/*    <FontAwesomeIcon icon={faBell} className="bell-shake" />*/}
+              {/*    {areNotificationsRead ? null : <span className="icon-badge rounded-circle unread-notifications" />}*/}
+              {/*  </span>*/}
+              {/*  </Dropdown.Toggle>*/}
+              {/*  <Dropdown.Menu className="dashboard-dropdown notifications-dropdown dropdown-menu-lg dropdown-menu-center mt-2 py-0">*/}
+              {/*    <ListGroup className="list-group-flush">*/}
+              {/*      <Nav.Link href="#" className="text-center text-primary fw-bold border-bottom border-light py-3">*/}
+              {/*        Уведомления*/}
+              {/*      </Nav.Link>*/}
 
-                    {/*{notifications.map(n => <Notification key={`notification-${n.id}`} {...n} />)}*/}
-                    {notifications.map(n => <Notification key={n.id} {...n} />)}
+              {/*      /!*{notifications.map(n => <Notification key={`notification-${n.id}`} {...n} />)}*!/*/}
+              {/*      {notifications.map(n => <Notification key={n.id} {...n} />)}*/}
 
-                    <Dropdown.Item className="text-center text-primary fw-bold py-3">
-                      Показать все
-                    </Dropdown.Item>
-                  </ListGroup>
-                </Dropdown.Menu>
-              </Dropdown>
+              {/*      <Dropdown.Item className="text-center text-primary fw-bold py-3">*/}
+              {/*        Показать все*/}
+              {/*      </Dropdown.Item>*/}
+              {/*    </ListGroup>*/}
+              {/*  </Dropdown.Menu>*/}
+              {/*</Dropdown>*/}
 
               <Dropdown as={Nav.Item}>
                 <Dropdown.Toggle as={Nav.Link} className="pt-1 px-0">
                   <div className="media d-flex justify-content-center">
-                    <Image src={process.env.REACT_APP_API_URL + loggedUser.img} className="user-avatar md-avatar rounded-circle" />
+                    {
+                      loggedUser.img ?
+                          <Image src={process.env.REACT_APP_API_URL + loggedUser.img} className="user-avatar md-avatar rounded-circle" /> :
+                          <FontAwesomeIcon icon={faUserCircle} className="bell-shake text-dark" />
+                    }
                     {/*<Image src={Profile3} className="user-avatar md-avatar rounded-circle" />*/}
                     {/*{*/}
                     {/*  board?.admins.map((el) => {*/}

@@ -18,8 +18,8 @@ export const fetchRoom = async () => {
 }
 
 export const createRoom = async (room) => {
-    const {data} = await $authHost.post('api/room/', room);
-    return data;
+    await $authHost.post('api/room/', room);
+    return fetchRoom();
 }
 
 export const fetchBranch = async () => {
@@ -41,6 +41,11 @@ export const fetchStudent = async () => {
 export const removeOneStudent = async (id) => {
     const {data} = await $authHost.delete('api/student/' + id);
     return data;
+}
+
+export const removeOneRoom = async (id) => {
+    await $authHost.delete('api/room/' + id);
+    return fetchRoom()
 }
 
 export const removeOneGroup = async (id) => {

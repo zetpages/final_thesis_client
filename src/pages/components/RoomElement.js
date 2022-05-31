@@ -6,13 +6,22 @@ import {Routes} from "../../routes";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faEllipsisH, faTrashAlt, faPlus, faGrip} from "@fortawesome/free-solid-svg-icons";
 import RoomModal from "../../components/Modals/RoomModal";
+import {fetchRoom, fetchStudent, removeOneRoom, removeOneStudent} from "../../http/boardAPI";
+import {Context} from "../../index";
+import TempElement from "./TempElement";
 
 const RoomElement = () => {
 
     const {center} = useContext(CenterContext);
+    const {board} = useContext(Context);
     const [roomVisible, setRoomVisible] = useState(false);
 
+
     const RoomRow = (room) => {
+
+        const removeSingleRoom = () => {
+            removeOneRoom(room.id).then(data => board.setRooms(data));
+        }
 
         const descriptionPop = (
             <Popover id="popover-basic">
@@ -36,7 +45,7 @@ const RoomElement = () => {
                             <Dropdown.Item>
                                 <FontAwesomeIcon icon={faEdit} className="me-2" /> Изменить
                             </Dropdown.Item>
-                            <Dropdown.Item className="text-danger">
+                            <Dropdown.Item className="text-danger" as={Button}  onClick={removeSingleRoom}>
                                 <FontAwesomeIcon icon={faTrashAlt} className="me-2" /> Удалить
                             </Dropdown.Item>
                         </Dropdown.Menu>

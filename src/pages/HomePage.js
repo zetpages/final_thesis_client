@@ -59,8 +59,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
 };
 
 export default function HomePage() {
-    const {user} = useContext(Context);
-    const {board} = useContext(Context);
+    const {user, board} = useContext(Context);
 
     useEffect(() => {
         fetchStudent().then(data => board.setStudents(data));

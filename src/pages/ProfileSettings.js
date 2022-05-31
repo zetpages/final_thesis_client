@@ -8,6 +8,8 @@ import InnerTopBar from "./components/InnerTopBar";
 import Datetime from "react-datetime";
 import moment from "moment-timezone";
 import ProfileCover from "../assets/img/profile-back.jpg";
+import {Image} from "@themesberg/react-bootstrap";
+import {faUserCircle} from "@fortawesome/free-regular-svg-icons";
 // import Profile1 from "../assets/img/team/profile-picture-1.jpg";
 // import {Image} from "@themesberg/react-bootstrap";
 
@@ -179,7 +181,12 @@ export default function ProfileSettings() {
               <Card border="light" className="text-center p-0 mb-4">
                 <div style={{ backgroundImage: `url(${ProfileCover})` }} className="profile-cover rounded-top" />
                 <Card.Body className="pb-5">
-                  <Card.Img key={loggedUser.id} src={process.env.REACT_APP_API_URL + loggedUser.img} className="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4" />
+                  {
+                    loggedUser.img ?
+                        <Card.Img key={loggedUser.id} src={process.env.REACT_APP_API_URL + loggedUser.img} className="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4" /> :
+                        <FontAwesomeIcon icon={faUserCircle} className="text-dark icon-xl" />
+                  }
+                  {/*<Card.Img key={loggedUser.id} src={process.env.REACT_APP_API_URL + loggedUser.img} className="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4" />*/}
                   <Card.Title>{loggedUser.name}</Card.Title>
                   {/*<Card.Subtitle className="fw-normal">{currentUser.phone}</Card.Subtitle>*/}
                   {/*<Card.Text className="text-gray mb-4">{currentUser.email}</Card.Text>*/}
