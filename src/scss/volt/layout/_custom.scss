@@ -352,7 +352,7 @@ h2 {
 }
 
 .bg-done {
-    background-color: #e0fbfc !important;
+    background-color: #61dafb !important;
 }
 
 .bg-none {
@@ -480,4 +480,41 @@ h2 {
 
 .bg_dark {
     background-color: #233044;
+}
+
+.calendar {
+    width: 3.125rem;
+    line-height: 1;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 0.5rem;
+}
+.calendar .calendar-month {
+    background-color: #e11d48;
+    color: #fff;
+    border-radius: 0.5rem 0.5rem 0 0;
+    padding: 0.275rem;
+    font-weight: 500;
+}
+.calendar .calendar-day {
+    font-size: 1.5rem;
+    padding: 0.25rem;
+    background-color: #f2f4f6;
+    border-top: 0;
+    border-radius: 0 0 0.5rem 0.5rem;
+    color: #1f2937;
+    font-weight: 500;
+}
+
+.course_infos > div{
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+}
+.course_infos > div:nth-of-type(odd) {
+    background: #f7f9ff;
+}
+.course_infos > div:nth-of-type(even) {
+    background: #dceef7;
 }

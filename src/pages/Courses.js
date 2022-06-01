@@ -7,7 +7,9 @@ import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from '../components/event-utils'
 import ruLocale from '@fullcalendar/core/locales/ru';
 import axios from "axios";
-import {Form} from "react-bootstrap";
+import {Button, Form, Modal} from "react-bootstrap";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faChalkboardUser, faUsers} from "@fortawesome/free-solid-svg-icons";
 
 
 let todayStr = new Date().toISOString().replace(/T.*$/, '') // YYYY-MM-DD of today
@@ -21,10 +23,12 @@ class Courses extends React.Component {
         currentEvents: [],
         nowEvents: [
             { title: "Event Now", start: new Date(), end: new Date(), teacher: 'Teacher'}
-        ]
+        ],
+        showDefault:false,
+        courseData:{}
     }
     
-    handleEventClick;
+    // handleEventClick;
     componentDidMount() {
         this.getClasses();
     }
@@ -39,12 +43,14 @@ class Courses extends React.Component {
                         tempData.push(t)
                     })
                 })
+                console.log(res.data)
                 const data = [
                     tempData.map(el => ({
                         id: el.id.toString(),
                         title: el.course.name,
                         start: el.dayDate+'T'+el.timeStart,
-                        end: el.dayDate+'T'+el.timeEnd
+                        end: el.dayDate+'T'+el.timeEnd,
+                        data: el
                     }))
                 ];
                 this.setState({data: data[0]});
@@ -70,13 +76,13 @@ class Courses extends React.Component {
                         initialView='timeGridWeek'
                         locale={ruLocale}
                         editable={true}
-                        selectable={true}
+                        // selectable={true}
                         selectMirror={true}
                         dayMaxEvents={true}
                         weekends={this.state.weekendsVisible}
                         // events={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
                         events={this.state.data} // alternatively, use the `events` setting to fetch from a feed
-                        select={this.handleDateSelect}
+                        // select={this.handleDateSelect}
                         eventContent={renderEventContent} // custom render function
                         eventClick={this.handleEventClick}
                         eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
@@ -87,6 +93,62 @@ class Courses extends React.Component {
                         */
                     />
                 </div>
+
+                {
+                    this.state.courseData!=null?
+                        <Modal as={Modal.Dialog} centered show={this.state.showDefault} onHide={()=>this.setState({showDefault: false})}>
+                            <Modal.Header>
+                                <Modal.Title className="h6">
+                                    <div className="d-flex justify-content-center align-items-center font__s-6">
+                                        {this.state.courseData.courseTypeId === 1 ? <FontAwesomeIcon icon={faChalkboardUser} className="text-dark me-1" /> : <FontAwesomeIcon icon={faUsers} className="text-dark me-1" />}
+                                        <span className="mx-2 font__s-3">{this.state.courseData.day}</span> <span className="ml-2 font__s-6">{this.state.courseData.dayDate}</span>
+                                    </div>
+
+                                </Modal.Title>
+                                <Button variant="close" aria-label="Close" onClick={()=>this.setState({showDefault: false})} />
+                            </Modal.Header>
+                            <Modal.Body className="course_infos">
+                                <div className="d-flex justify-content-between">
+                                    <span>Тип:</span>
+                                    <span>{this.state.courseData?.course_type?.name}</span>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <span>Время:</span>
+                                    <span>{this.state.courseData?.timeStart}, {this.state.courseData?.durationLong}мин</span>
+                                </div>
+
+
+                                <div className="d-flex justify-content-between">
+                                    <span>Предмет:</span>
+                                    <span>{this.state.courseData?.course?.name}</span>
+                                </div>
+
+                                <div className="d-flex justify-content-between">
+                                    <span>Филиал:</span>
+                                    <span>{this.state.courseData?.room?.branch?.name}</span>
+                                </div>
+
+                                <div className="d-flex justify-content-between ">
+                                    <span>Аудитория:</span>
+                                    <span>{this.state.courseData?.room?.name}</span>
+                                </div>
+
+                                <div className="d-flex justify-content-between">
+                                    <span>Адрес:</span>
+                                    <span>{this.state.courseData?.room?.branch?.address}</span>
+                                </div>
+
+                            </Modal.Body>
+                            <Modal.Footer>
+
+                                <Button variant="link" className="text-gray ms-auto" onClick={()=>this.setState({showDefault: false})}>
+                                    Закрыть
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>:
+                        <></>
+
+                }
             </div>
         )
     }
@@ -150,11 +212,13 @@ class Courses extends React.Component {
         console.log(selectInfo)
     }
 
-    // handleEventClick = (clickInfo) => {
-    //   if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-    //     clickInfo.event.remove()
-    //   }
-    // }
+    handleEventClick = (info) => {
+        this.setState({
+            courseData:info.event.extendedProps.data,
+            showDefault: true
+        })
+        console.log(info.event.extendedProps.data)
+    }
 
     handleEvents = (events) => {
         this.setState({

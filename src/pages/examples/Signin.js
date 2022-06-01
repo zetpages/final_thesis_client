@@ -94,17 +94,17 @@ export default () => {
                   </Button>
                 </Form>
 
-                <div className="mt-3 mb-4 text-center">
-                  <span className="fw-normal">войти с помощью</span>
-                </div>
-                <div className="d-flex justify-content-center my-4">
-                  <Button variant="outline-light" className="btn-icon-only btn-pill text-facebook me-2">
-                    <FontAwesomeIcon icon={faFacebookF} />
-                  </Button>
-                  <Button variant="outline-light" className="btn-icon-only btn-pil text-dark">
-                    <FontAwesomeIcon icon={faGoogle} />
-                  </Button>
-                </div>
+                {/*<div className="mt-3 mb-4 text-center">*/}
+                {/*  <span className="fw-normal">войти с помощью</span>*/}
+                {/*</div>*/}
+                {/*<div className="d-flex justify-content-center my-4">*/}
+                {/*  <Button variant="outline-light" className="btn-icon-only btn-pill text-facebook me-2">*/}
+                {/*    <FontAwesomeIcon icon={faFacebookF} />*/}
+                {/*  </Button>*/}
+                {/*  <Button variant="outline-light" className="btn-icon-only btn-pil text-dark">*/}
+                {/*    <FontAwesomeIcon icon={faGoogle} />*/}
+                {/*  </Button>*/}
+                {/*</div>*/}
                 <div className="d-flex justify-content-center align-items-center mt-4">
                   <span className="fw-normal">
                     Нет аккаунта?

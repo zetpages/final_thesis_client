@@ -139,16 +139,16 @@ export default class Tasks extends React.Component {
 
   componentDidMount() {
     this.getTodos();
-    this.postTodos();
+    // this.postTodos();
   }
 
-  postTodos = () => {
-      axios
-          .post("http://localhost:5000/api/task-category/")
-          .then(res => {
-
-          })
-  }
+  // postTodos = () => {
+  //     axios
+  //         .post("http://localhost:5000/api/task-category/")
+  //         .then(res => {
+  //
+  //         })
+  // }
 
   getTodos = () => {
     axios

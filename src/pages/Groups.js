@@ -185,11 +185,7 @@ const Groups = observer(() => {
                 </td>
 
                 <td>
-                    { group.teacher?.length ?
-                        group.teacher.map((el) =>
-                            <span className="fw-normal" key={el.id}>{el.name}</span>
-                        ) : <span className="fw-normal">Set teacher</span>
-                    }
+                    <span className="fw-normal">{group.teacher?.name}</span>
                 </td>
 
                 <td>
@@ -268,7 +264,7 @@ const Groups = observer(() => {
                             </Pagination>
                         </Nav>
                         <small className="fw-bold">
-                            Показано <b>{totalGroups}</b> из <b>25</b> строк
+                            Показано <b>{totalGroups}</b> из <b>{totalGroups}</b> строк
                         </small>
                     </Card.Footer>
                 </Card.Body>

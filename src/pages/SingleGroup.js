@@ -3,6 +3,8 @@ import {useParams} from "react-router-dom";
 import {fetchOneGroup, fetchOneStudent} from "../http/boardAPI";
 import {
     Button,
+    Modal,
+    Form,
     ButtonGroup,
     Col,
     Dropdown,
@@ -36,19 +38,41 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {Card} from "@themesberg/react-bootstrap";
 
-
+const weekdayConvert={
+    "Mon":"Пн",
+    "Tue":"Вт",
+    "Wed":"Ср",
+    "Thu":"Чт",
+    "Fri":"Пт",
+    "Sat":"Сб",
+    "Sun":"Вс"
+}
 const SingleGroup = () => {
     const [group, setGroup] = useState({});
     const [key, setKey] = useState(0);
     const [innerKey, setInnerKey] = useState(0);
     const {id} = useParams();
 
+    const [showDefault, setShowDefault] = useState(false);
+    const [courseData, setCourseData] = useState({});
+    const [regID, setRegID] = useState(0);
+    const [studentsData, setStudentsData] = useState([]);
+    const handleClose = () => setShowDefault(false);
+
+    const saveModal = (id)=>{
+        let tempGroup = group
+        let index = tempGroup.regular_classes[regID].single_classes.findIndex(item => item.id === id);
+        tempGroup.regular_classes[regID].single_classes[index]["classState"] = "Проведен"
+        console.log(index)
+        setGroup(tempGroup)
+        handleClose()
+
+    }
 
     useEffect(() => {
         fetchOneGroup(id).then(data => setGroup(data));
     },[]);
 
-    console.log(group)
 
 
 
@@ -183,7 +207,7 @@ const SingleGroup = () => {
                                                 <Card.Body className="pt-2 pb-4 px-0">
                                                     {t.weekDays?.map((f, k) =>
                                                         <div className="d-flex justify-content-between custom__prop-line mt-2 px-2" key={k}>
-                                                            <h6 className="text-nowrap">{f}</h6>
+                                                            <h6 className="text-nowrap">{weekdayConvert[f]}</h6>
                                                             <div className="regular__class">
                                                                 <p>
                                                                     <FontAwesomeIcon icon={faClock} className="me-2 " />
@@ -251,8 +275,8 @@ const SingleGroup = () => {
                                                             <OverlayTrigger
                                                                 key={s.id}
                                                                 trigger="click"
+                                                                rootClose
                                                                 placement="auto"
-                                                                shouldUpdatePosition={true}
                                                                 overlay={(
                                                                     <Popover id="popover-basic">
                                                                         <Popover.Header as="h3">
@@ -283,6 +307,10 @@ const SingleGroup = () => {
                                                                                 <span>{s?.course?.name}</span>
                                                                             </div>
 
+                                                                            <div className="d-flex justify-content-center align-items-center pt-2">
+                                                                                <button className="btn btn-primary btn-sm" onClick={() => {document.body.click();setCourseData(s);setStudentsData(group.students);setShowDefault(true);setRegID(j)}}> Провести</button>
+                                                                            </div>
+
                                                                         </Popover.Body>
                                                                     </Popover>
                                                                 )} >
@@ -306,6 +334,89 @@ const SingleGroup = () => {
                     </Row>
                 </Col>
             </Row>
+
+
+
+
+
+                {
+                    courseData!=null?
+                        <Modal as={Modal.Dialog} centered show={showDefault} onHide={handleClose}>
+                            <Modal.Header>
+                                <Modal.Title className="h6">
+                                    <div className="d-flex justify-content-center align-items-center font__s-6">
+                                        {courseData.courseTypeId === 1 ? <FontAwesomeIcon icon={faChalkboardUser} className="text-dark me-1" /> : <FontAwesomeIcon icon={faUsers} className="text-dark me-1" />}
+                                        <span className="mx-2 font__s-3">{courseData.day}</span> <span className="ml-2 font__s-6">{courseData.dayDate}</span>
+                                    </div>
+
+                                </Modal.Title>
+                                <Button variant="close" aria-label="Close" onClick={handleClose} />
+                            </Modal.Header>
+                            <Modal.Body  className="course_infos">
+                                <div className="d-flex justify-content-between">
+                                    <span>Тип:</span>
+                                    <span>{courseData?.course_type?.name}</span>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <span>Время:</span>
+                                    <span>{courseData?.timeStart}, {courseData?.durationLong}мин</span>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <span>Филиал:</span>
+                                    <span className="text-end">{group.branch?.name}, <br/> {courseData?.room?.name}</span>
+                                </div>
+
+                                <div className="d-flex justify-content-between custom__prop-line">
+                                    <span>Предмет:</span>
+                                    <span>{courseData?.course?.name}</span>
+                                </div>
+
+                                <h6 className="my-2"> Список студентов: </h6>
+                                <div className="card-body bg-transparent">
+                                    <div className="list-group-flush list my--3 list-group">
+                                        <Form>
+                                            {studentsData.map(student=>{
+                                            return (
+                                                <div key={student.id} className="px-0 list-group-item">
+                                                    <div className="align-items-center row">
+                                                        <div className="col-auto col"><a href="#top" className="user-avatar"><img src={process.env.REACT_APP_API_URL + student.img} className="rounded-circle" /></a></div>
+                                                        <div className="ms--2 col">
+                                                            <h4 className="h6 mb-0"><a href="#!">{student.name}</a></h4>
+                                                            <span className="text-success">● </span><small>{student.phone}</small>
+                                                        </div>
+                                                        <div className="col-auto col">
+
+                                                                <Form.Check
+                                                                type="checkbox"
+                                                                id={student.id}
+                                                            />
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                            <div className="btn btn-success float-end" onClick={()=>saveModal(courseData.id)}>Сохранить</div>
+                                        </Form>
+
+
+                                    </div>
+
+                                </div>
+                            </Modal.Body>
+                            <Modal.Footer>
+
+                                <Button variant="link" className="text-gray ms-auto" onClick={handleClose}>
+                                    Закрыть
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>:
+                        <></>
+
+                }
+
+
+
         </>
     );
 };
