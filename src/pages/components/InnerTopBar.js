@@ -35,6 +35,9 @@ const InnerTopBar = () => {
         case 'products':
             temp = 'Товары';
             break;
+        case 'parents':
+            temp = 'Родители';
+            break;
         case 'general-settings':
             temp = 'Основные настройки';
             break;

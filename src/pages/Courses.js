@@ -1,6 +1,4 @@
 import React from "react";
-// import DemoApp from "../components/CalendarCom";
-import {Context} from "../index";
 import InnerTopBar from "./components/InnerTopBar";
 import FullCalendar, {formatDate} from "@fullcalendar/react";
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -30,10 +28,6 @@ class Courses extends React.Component {
     componentDidMount() {
         this.getClasses();
     }
-    // static contextType: React.Context<Context> = Context;
-    // context: Context;
-    // static contextType = Context;
-    // context: React.ContextType<typeof Context>;
 
     getClasses = () => {
         axios
@@ -46,11 +40,6 @@ class Courses extends React.Component {
                     })
                 })
                 const data = [
-                    // res.data.map(classes => ({
-                    //     id: classes.id.toString(),
-                    //     title: classes.name,
-                    //     start: todayStr
-                    // }))
                     tempData.map(el => ({
                         id: el.id.toString(),
                         title: el.course.name,
@@ -58,12 +47,6 @@ class Courses extends React.Component {
                         end: el.dayDate+'T'+el.timeEnd
                     }))
                 ];
-                // console.log(data[0])
-                // console.log(res.data)
-                // const newData = data[0];
-                // const newData = [...data];
-                // console.log(newData)
-                // this.setState({data: newData});
                 this.setState({data: data[0]});
 
             })
@@ -72,10 +55,6 @@ class Courses extends React.Component {
             });
     };
     render() {
-        // let board = this.context;
-        // console.log(board)
-        // console.log(this.state.data)
-        // console.log(INITIAL_EVENTS)
         return (
             <div className='demo-app'>
                 <InnerTopBar/>
@@ -188,7 +167,12 @@ class Courses extends React.Component {
 function renderEventContent(eventInfo) {
     return (
         <>
-            <b>{eventInfo.timeText}</b>
+            <div className="class__box bg-dark">
+                <b>{eventInfo.timeText}</b>
+            </div>
+            {/*<b>{eventInfo.timeText}</b>*/}
+            <br/>
+
             <i>{eventInfo.event.title}</i>
             <span>{eventInfo.event.teacher}</span>
         </>
@@ -206,115 +190,3 @@ function renderSidebarEvent(event) {
 }
 
 export default Courses;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, {useContext} from 'react';
-// import {Context} from "../index";
-//
-// const Courses = () => {
-//
-//     const {board} = useContext(Context);
-//     console.log(board)
-//     return (
-//         <>
-//         </>
-//     )
-// };
-//
-// export default Courses;
-
-
-// import { observer } from "mobx-react-lite";
-// import React, { useContext } from "react";
-// import FullCalendar, {
-//     EventContentArg,
-//     EventClickArg,
-//     DateSelectArg,
-//     EventChangeArg,
-// } from "@fullcalendar/react";
-// import dayGridPlugin from "@fullcalendar/daygrid";
-// import interactionPlugin from "@fullcalendar/interaction";
-// import timeGridPlugin from "@fullcalendar/timegrid";
-//
-// // import { Sidebar } from "./Sidebar";
-// import { eventStoreContext } from "../components/evets-store";
-//
-// const Courses = observer(function DemoApp() {
-//     const eventStore = useContext(eventStoreContext);
-//     console.log(eventStore)
-//
-//     function handleEventClick(clickInfo) {
-//         if (
-//             prompt(
-//                 `Are you sure you want to delete the event '${clickInfo.event.title}'`
-//             )
-//         ) {
-//             eventStore.deleteEvent(clickInfo.event.id);
-//         }
-//     }
-//
-//     function handleDateSelect(selectInfo) {
-//         let title = prompt("Please enter a new title for your event");
-//         const calendarApi = selectInfo.view.calendar;
-//         calendarApi.unselect(); // clear date selection
-//         eventStore.addEvent(selectInfo, title);
-//     }
-//
-//     function handleEventChange(changeInfo) {
-//         eventStore.changeEvent(changeInfo);
-//     }
-//
-//     return (
-//         <div className="demo-app">
-//             {/*<Sidebar />*/}
-//             <div className="demo-app-main">
-//                 <FullCalendar
-//                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-//                     headerToolbar={{
-//                         left: "prev,next today",
-//                         center: "title",
-//                         right: "dayGridMonth,timeGridWeek,timeGridDay",
-//                     }}
-//                     initialView="dayGridMonth"
-//                     editable={true}
-//                     selectable={true}
-//                     selectMirror={true}
-//                     dayMaxEvents={true}
-//                     weekends={eventStore.weekendsVisible}
-//                     /**
-//                      * slice() is used to achieve MobX observability on eventStore.events
-//                      * https://mobx.js.org/best/react.html#incorrect-use-an-observable-but-without-accessing-any-of-its-properties
-//                      */
-//                     events={eventStore.events.slice()} //
-//                     select={handleDateSelect}
-//                     eventContent={renderEventContent}
-//                     eventClick={handleEventClick}
-//                     eventChange={handleEventChange}
-//                 />
-//             </div>
-//         </div>
-//     );
-// });
-//
-// function renderEventContent(eventContent) {
-//     return (
-//         <>
-//             <b>{eventContent.timeText}</b>
-//             <i>{eventContent.event.title}</i>
-//         </>
-//     );
-// }
-//
-// export default Courses;

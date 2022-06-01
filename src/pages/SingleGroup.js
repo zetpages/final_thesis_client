@@ -47,6 +47,7 @@ const SingleGroup = () => {
     useEffect(() => {
         fetchOneGroup(id).then(data => setGroup(data));
     },[]);
+
     console.log(group)
 
 

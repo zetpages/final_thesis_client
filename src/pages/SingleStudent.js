@@ -36,7 +36,35 @@ import {
     faUsers
 } from "@fortawesome/free-solid-svg-icons";
 import {Card} from "@themesberg/react-bootstrap";
+// const weekName = (value) => {
+//         switch (value) {
+//             case 'Mon':
+//                 value = 'Пн.';
+//                 break;
+//             case 'Tue':
+//                 value = 'Вт.';
+//                 break;
+//             case 'Wed':
+//                 value = 'Ср.';
+//                 break;
+//             case 'Thu':
+//                 value = 'Чт.';
+//                 break;
+//             case 'Fri':
+//                 value = 'Пт.';
+//                 break;
+//             case 'Sat':
+//                 value = 'Сб.';
+//                 break;
+//             case 'Sun':
+//                 value = 'Вс.'
+//
+//         return value;
+//     }
 
+const weekName = {
+    "Mon": "Пон"
+}
 
 const SingleStudent = () => {
     const [student, setStudent] = useState({});
@@ -215,7 +243,7 @@ const SingleStudent = () => {
                                                             </div>
                                                             {t.weekDays?.map((f, k) =>
                                                                 <div className="d-flex justify-content-between custom__prop-line mt-2 px-2" key={k}>
-                                                                    <h6 className="text-nowrap">{f}</h6>
+                                                                    <h6 className="text-nowrap">{weekName[f]}</h6>
                                                                     <div className="regular__class">
                                                                         <p>
                                                                             <FontAwesomeIcon icon={faClock} className="me-2 " />

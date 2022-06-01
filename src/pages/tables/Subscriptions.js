@@ -9,8 +9,8 @@ export default () => {
   return (
     <>
         <InnerTopBar />
-        <PageTrafficTable />
-        <RankingTable />
+        {/*<PageTrafficTable />*/}
+        {/*<RankingTable />*/}
     </>
   );
 };

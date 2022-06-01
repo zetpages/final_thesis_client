@@ -453,26 +453,6 @@ export const TeachersTable = () => {
             {teachers.map(t => <TableRow key={`transaction-${t.teacherId}`} {...t} />)}
           </tbody>
         </Table>
-        <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
-          <Nav>
-            <Pagination className="mb-2 mb-lg-0">
-              <Pagination.Prev>
-                Назад
-              </Pagination.Prev>
-              <Pagination.Item active>1</Pagination.Item>
-              <Pagination.Item>2</Pagination.Item>
-              <Pagination.Item>3</Pagination.Item>
-              <Pagination.Item>4</Pagination.Item>
-              <Pagination.Item>5</Pagination.Item>
-              <Pagination.Next>
-                Вперед
-              </Pagination.Next>
-            </Pagination>
-          </Nav>
-          <small className="fw-bold">
-            Показано <b>{totalTeachers}</b> из <b>25</b> строк
-          </small>
-        </Card.Footer>
       </Card.Body>
     </Card>
   );

@@ -3,7 +3,7 @@ import alimImage2 from '../assets/img/team/profile-picture-2.jpg';
 import alimImage3 from '../assets/img/team/profile-picture-3.jpg';
 export default [
     {
-        "teacherId": 302,
+        "teacherId": 1,
         "teacherPhoto": alimImage1,
         "teacherName": "Алим",
         "teacherGender": "Мужчина",
@@ -13,83 +13,14 @@ export default [
         "teacherBranch": "Skilland"
     },
     {
-        "teacherId": 302,
+        "teacherId": 2,
         "teacherPhoto": alimImage2,
-        "teacherName": "Алим",
+        "teacherName": "Акылбек",
         "teacherGender": "Мужчина",
         "teacherBirth": "11.12.2001",
-        "teacherContact": "990445522",
+        "teacherContact": "990454534",
         "teacherStatus": "Отпуск",
         "teacherBranch": "Skilland"
     },
-    {
-        "teacherId": 302,
-        "teacherPhoto": alimImage2,
-        "teacherName": "Алим",
-        "teacherGender": "Мужчина",
-        "teacherBirth": "11.12.2001",
-        "teacherContact": "990445522",
-        "teacherStatus": "Отпуск",
-        "teacherBranch": "Skilland"
-    },
-    {
-        "teacherId": 302,
-        "teacherPhoto": alimImage2,
-        "teacherName": "Алим",
-        "teacherGender": "Мужчина",
-        "teacherBirth": "11.12.2001",
-        "teacherContact": "990445522",
-        "teacherStatus": "Отпуск",
-        "teacherBranch": "Skilland"
-    },
-    {
-        "teacherId": 302,
-        "teacherPhoto": alimImage2,
-        "teacherName": "Алим",
-        "teacherGender": "Мужчина",
-        "teacherBirth": "11.12.2001",
-        "teacherContact": "990445522",
-        "teacherStatus": "Отпуск",
-        "teacherBranch": "Skilland"
-    },
-    {
-        "teacherId": 302,
-        "teacherPhoto": alimImage2,
-        "teacherName": "Алим",
-        "teacherGender": "Мужчина",
-        "teacherBirth": "11.12.2001",
-        "teacherContact": "990445522",
-        "teacherStatus": "Отпуск",
-        "teacherBranch": "Skilland"
-    },
-    {
-        "teacherId": 302,
-        "teacherPhoto": alimImage2,
-        "teacherName": "Алим",
-        "teacherGender": "Мужчина",
-        "teacherBirth": "11.12.2001",
-        "teacherContact": "990445522",
-        "teacherStatus": "Отпуск",
-        "teacherBranch": "Skilland"
-    },
-    {
-        "teacherId": 302,
-        "teacherPhoto": alimImage2,
-        "teacherName": "Алим",
-        "teacherGender": "Мужчина",
-        "teacherBirth": "11.12.2001",
-        "teacherContact": "990445522",
-        "teacherStatus": "Отпуск",
-        "teacherBranch": "Skilland"
-    },
-    {
-        "teacherId": 302,
-        "teacherPhoto": alimImage3,
-        "teacherName": "Алим",
-        "teacherGender": "Мужчина",
-        "teacherBirth": "11.12.2001",
-        "teacherContact": "990445522",
-        "teacherStatus": "Уволился",
-        "teacherBranch": "Skilland"
-    }
+
 ]
